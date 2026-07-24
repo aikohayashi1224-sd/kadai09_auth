@@ -14,10 +14,10 @@ $page_title = $page_title ?? 'エンディングノート';
 <body>
     <header class="site-header">
         <div class="header-inner">
-            <h1 class="site-title"><a href="/gs_kadai/kadai09/index.php">📋 エンディングノート</a></h1>
+            <h1 class="site-title"><a href="/kadai09/index.php">📋 エンディングノート</a></h1>
             <nav class="site-nav">
                 <span>ようこそ、<?= htmlspecialchars($_SESSION['user_name'] ?? '') ?>さん</span>
-                <a href="/gs_kadai/kadai09/logout.php">ログアウト</a>
+                <a href="/kadai09/logout.php">ログアウト</a>
             </nav>
         </div>
     </header>
