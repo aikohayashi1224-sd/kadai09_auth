@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>引受人ログイン - エンディングノート</title>
-    <link rel="stylesheet" href="/gs_kadai/kadai09/css/style.css">
+    <link rel="stylesheet" href="/kadai09/css/style.css">
 </head>
 <body>
     <div class="container" style="max-width:420px; margin-top:80px;">
@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </form>
 
             <p style="text-align:center; margin-top:20px; font-size:0.9rem;">
-                <a href="/gs_kadai/kadai09/index.php">ユーザーログインはこちら</a>
+                <a href="/kadai09/index.php">ユーザーログインはこちら</a>
             </p>
         </div>
     </div>

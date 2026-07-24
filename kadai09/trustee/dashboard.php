@@ -62,7 +62,7 @@ $sections = [
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>引受人ダッシュボード - エンディングノート</title>
-    <link rel="stylesheet" href="/gs_kadai/kadai09/css/style.css">
+    <link rel="stylesheet" href="/kadai09/css/style.css">
 </head>
 <body>
     <header class="site-header">
