@@ -22,6 +22,19 @@ $stmt = $pdo->prepare("SELECT id, name, relationship, is_disclosed FROM trustees
 $stmt->execute([$user_id]);
 $trustees = $stmt->fetchAll();
 
+// 生まれてから何日目か計算
+$birth_days = null;
+$stmt = $pdo->prepare("SELECT birth_date FROM profile WHERE user_id = ?");
+$stmt->execute([$user_id]);
+$profile_data = $stmt->fetch();
+
+if (!empty($profile_data['birth_date'])) {
+    $birth = new DateTime($profile_data['birth_date']);
+    $today = new DateTime('today');
+    $diff  = $today->diff($birth);
+    $birth_days = (int)$diff->days + 1;
+}
+
 // 入力進捗チェック
 $sections = [
     'profile'    => ['label' => '基本情報',           'multi' => false],
@@ -82,6 +95,21 @@ require_once '../includes/header.php';
             <h2>ようこそ、<?= htmlspecialchars($_SESSION['user_name']) ?>さん</h2>
             <p>左のメニューから各項目を入力・編集できます。</p>
         </div>
+
+        <!-- 今日で何日 -->
+        <?php if ($birth_days): ?>
+        <div class="card" style="background: linear-gradient(135deg, #fde8f0, #e8f4fd); border: none;">
+        <p style="font-size: 0.85rem; color: #999; margin-bottom: 4px;">今日のあなた</p>
+        <p style="font-size: 2rem; font-weight: bold; color: #c0788a; margin: 0;">
+            生まれてから <span style="font-size: 2.5rem;"><?= number_format($birth_days) ?></span> 日目
+        </p>
+        <p style="font-size: 0.9rem; color: #a0b8c8; margin-top: 8px;">
+             人生はたくさんの思い出と共に。
+        </p>
+    </div>
+    
+    <?php endif; ?>
+
 
         <!-- 入力進捗 -->
         <div class="card">
