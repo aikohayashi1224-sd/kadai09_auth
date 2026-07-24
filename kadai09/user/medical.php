@@ -118,7 +118,7 @@ require_once '../includes/header.php';
                 <div class="form-group">
                     <label>延命治療の希望</label>
                     <select name="life_support">
-                        <?php foreach (['', '希望する', '希望しない', '家族に任せる', '状況による'] as $t): ?>
+                        <?php foreach (['', '希望する', '希望しない', '家族に任せる'] as $t): ?>
                             <option value="<?= $t ?>" <?= ($row['life_support'] ?? '') === $t ? 'selected' : '' ?>>
                                 <?= $t === '' ? '選択してください' : $t ?>
                             </option>
