@@ -127,39 +127,52 @@ require_once '../includes/header.php';
                 </div>
 
                 <h3 class="section-heading">臓器提供</h3>
-                <div class="form-group">
-                    <label>臓器提供の意思</label>
-                    <select name="organ_donation">
-                        <?php foreach (['未記入', '提供する', '一部提供', '家族に一任', '提供しない'] as $t): ?>
-                            <option value="<?= $t ?>" <?= ($row['organ_donation'] ?? '未記入') === $t ? 'selected' : '' ?>>
-                                <?= $t ?>
-                            </option>
+                    <div class="form-group">
+                        <label>臓器提供の意思</label>
+                        <select name="organ_donation" id="organ_donation">
+                            <?php foreach (['未記入', '提供する', '家族に一任', '提供しない'] as $t): ?>
+                                <option value="<?= $t ?>" <?= ($row['organ_donation'] ?? '未記入') === $t ? 'selected' : '' ?>>
+                                    <?= $t ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="organ_detail" style="display:none;">
+                        <label>提供する臓器の指定（任意）</label>
+                        <?php
+                        $organs = [
+                            'organ_heart'           => '心臓',
+                            'organ_lung'            => '肺',
+                            'organ_liver'           => '肝臓',
+                            'organ_kidney'          => '腎臓',
+                            'organ_pancreas'        => '膵臓',
+                            'organ_small_intestine' => '小腸',
+                            'organ_eye'             => '眼球（角膜）',
+                            'organ_skin'            => '皮膚',
+                            'organ_bone'            => '骨・骨髄',
+                        ];
+                        foreach ($organs as $col => $label):
+                            $checked = !empty($row[$col]) ? 'checked' : '';
+                        ?>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="<?= $col ?>" value="1" <?= $checked ?>>
+                            <?= $label ?>
+                        </label>
                         <?php endforeach; ?>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>提供する臓器の指定（任意）</label>
-                    <?php
-                    $organs = [
-                        'organ_heart'           => '心臓',
-                        'organ_lung'            => '肺',
-                        'organ_liver'           => '肝臓',
-                        'organ_kidney'          => '腎臓',
-                        'organ_pancreas'        => '膵臓',
-                        'organ_small_intestine' => '小腸',
-                        'organ_eye'             => '眼球（角膜）',
-                        'organ_skin'            => '皮膚',
-                        'organ_bone'            => '骨・骨髄',
-                    ];
-                    foreach ($organs as $col => $label):
-                        $checked = !empty($row[$col]) ? 'checked' : '';
-                    ?>
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="<?= $col ?>" value="1" <?= $checked ?>>
-                        <?= $label ?>
-                    </label>
-                    <?php endforeach; ?>
-                </div>
+                    </div>
+
+                    <script>
+                        const organSelect = document.getElementById('organ_donation');
+                        const organDetail = document.getElementById('organ_detail');
+
+                        function toggleOrganDetail() {
+                            organDetail.style.display = organSelect.value === '提供する' ? 'block' : 'none';
+                        }
+
+                        organSelect.addEventListener('change', toggleOrganDetail);
+                        toggleOrganDetail(); // ページ読み込み時にも実行
+                    </script>
 
                 <button type="submit">保存する</button>
             </form>
